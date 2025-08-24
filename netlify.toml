@@ -1,0 +1,15 @@
+[build.environment]
+  ENV_FILE = ".env"
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+  REACT_APP_API_URL = "/.netlify/functions"
+  GENERATE_SOURCEMAP = "false"
+  SKIP_PREFLIGHT_CHECK = "true"
+  CI = "false"
+
+[build]
+  command = "npm run build:netlify"
+  publish = "client/build"
+
+[functions]
+  directory = "netlify/functions"
