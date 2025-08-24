@@ -512,7 +512,7 @@ export const useAsyncOptimization = () => {
     const pollTaskStatus = async () => {
       try {
           console.log('🔍 轮询任务ID:', taskId);
-          const response = await fetch(`${API_ENDPOINTS.TASK}/${taskId}`);
+          const response = await fetch(`${API_ENDPOINTS.TASK}?id=${taskId}`);
           console.log('📡 轮询响应状态:', response.status);
           if (!response.ok) {
             throw new Error(`轮询请求失败: ${response.status} ${response.statusText}`);
@@ -635,7 +635,7 @@ const errorMsg = result.error || '任务创建失败，但未返回任务ID';
     }
 
     try {
-      const response = await fetch(`/api/task/${currentTask.taskId}`, {
+      const response = await fetch(`${API_ENDPOINTS.TASK}?id=${currentTask.taskId}`, {
         method: 'DELETE'
       });
 

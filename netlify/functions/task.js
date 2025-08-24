@@ -20,8 +20,11 @@ exports.handler = async (event, context) => {
   try {
     switch (event.httpMethod) {
       case 'GET':
-        // 获取任务状态
-        const taskId = event.path.split('/').pop();
+        // 获取任务状态 - 支持查询参数和路径参数两种格式
+        let taskId = event.queryStringParameters?.id;
+        if (!taskId) {
+          taskId = event.path.split('/').pop();
+        }
         if (!taskId || taskId === 'task') {
           // 获取所有活跃任务
           const allTasks = db.getOptimizationTasks();
@@ -102,8 +105,11 @@ exports.handler = async (event, context) => {
         };
 
       case 'DELETE':
-        // 取消任务
-        const cancelTaskId = event.path.split('/').pop();
+        // 取消任务 - 支持查询参数和路径参数两种格式
+        let cancelTaskId = event.queryStringParameters?.id;
+        if (!cancelTaskId) {
+          cancelTaskId = event.path.split('/').pop();
+        }
         
         // 获取任务并检查状态
         const taskToCancel = db.getOptimizationTask(cancelTaskId);

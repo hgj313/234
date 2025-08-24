@@ -22,5 +22,5 @@ export const API_ENDPOINTS = {
   STATS: `${API_BASE_URL}/stats`,
   HISTORY: `${API_BASE_URL}/history`,
   TASK: `${API_BASE_URL}/task`,
-  TASKS: `${API_BASE_URL}/tasks`
+  TASKS: `${API_BASE_URL}/history`
 };

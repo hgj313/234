@@ -128,7 +128,7 @@ export const OptimizationContextProvider: React.FC<{ children: ReactNode }> = ({
   const pollTaskStatus = async (taskId: string) => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`${API_ENDPOINTS.TASK}/${taskId}`);
+        const response = await fetch(`${API_ENDPOINTS.TASK}?id=${taskId}`);
         const result = await response.json();
 
         if (result.status === 'completed') {
