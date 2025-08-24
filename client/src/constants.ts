@@ -7,7 +7,7 @@ export const DEFAULT_CONSTRAINTS: OptimizationConstraints = {
   maxWeldingSegments: 1,      // 最大焊接次数 (次) - 对应后端2段，允许1次焊接
 };
 
-// API配置 - 根据环境自动选择正确的API路径
+// API配置 - 使用相对路径
 export const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? '/.netlify/functions' 
   : '/api';
