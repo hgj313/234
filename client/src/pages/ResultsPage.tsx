@@ -26,6 +26,7 @@ import ProcurementList from '../components/results/ProcurementList';
 import LoadingPage from '../components/LoadingPage';
 import { useOptimizationResults } from '../hooks/useOptimizationResults';
 import { OptimizationResult } from '../types';
+import { API_ENDPOINTS } from '../constants';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -146,7 +147,7 @@ const ResultsPage: React.FC = () => {
         }
       }
 
-      const response = await fetch('/.netlify/functions/export', {
+      const response = await fetch(API_ENDPOINTS.EXPORT_EXCEL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -218,7 +219,7 @@ const ResultsPage: React.FC = () => {
         designSteels: designSteelsMemo
       };
 
-      const response = await fetch('/.netlify/functions/export', {
+      const response = await fetch(API_ENDPOINTS.EXPORT_PDF, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

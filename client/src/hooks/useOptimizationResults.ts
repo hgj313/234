@@ -3,6 +3,7 @@ import { useOptimizationContext } from '../contexts/OptimizationContext';
 import { useNavigate } from 'react-router-dom';
 import { DesignSteel, OptimizationResult } from '../types';
 import { generateDisplayIds, regroupOptimizationResultsBySpecification } from '../utils/steelUtils';
+import { API_ENDPOINTS } from '../constants';
 
 // 统计数据接口
 export interface TotalStats {
@@ -511,7 +512,7 @@ export const useAsyncOptimization = () => {
     const pollTaskStatus = async () => {
       try {
           console.log('🔍 轮询任务ID:', taskId);
-          const response = await fetch(`/api/task/${taskId}`);
+          const response = await fetch(`${API_ENDPOINTS.TASK}/${taskId}`);
           console.log('📡 轮询响应状态:', response.status);
           if (!response.ok) {
             throw new Error(`轮询请求失败: ${response.status} ${response.statusText}`);
@@ -577,7 +578,7 @@ export const useAsyncOptimization = () => {
         }
       };
       
-      const response = await fetch('/.netlify/functions/optimize', {
+      const response = await fetch(API_ENDPOINTS.OPTIMIZE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -677,7 +678,7 @@ const errorMsg = result.error || '任务创建失败，但未返回任务ID';
   // 获取任务历史
   const getTaskHistory = useCallback(async (limit = 20) => {
     try {
-      const response = await fetch(`/api/tasks?limit=${limit}`);
+      const response = await fetch(`${API_ENDPOINTS.TASKS}?limit=${limit}`);
       const result = await response.json();
 
       if (result.success) {

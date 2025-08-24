@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { OptimizationResult, DesignSteel, ModuleSteel, OptimizationConstraints } from '../types';
-import { DEFAULT_CONSTRAINTS } from '../constants';
+import { DEFAULT_CONSTRAINTS, API_ENDPOINTS } from '../constants';
 
 interface OptimizationContextType {
   optimizationResults: OptimizationResult | null;
@@ -90,7 +90,7 @@ export const OptimizationContextProvider: React.FC<{ children: ReactNode }> = ({
 
       console.log('🚀 开始优化，发送数据:', optimizationData);
 
-      const response = await fetch('/.netlify/functions/optimize', {
+      const response = await fetch(API_ENDPOINTS.OPTIMIZE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +128,7 @@ export const OptimizationContextProvider: React.FC<{ children: ReactNode }> = ({
   const pollTaskStatus = async (taskId: string) => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`/api/task/${taskId}`);
+        const response = await fetch(`${API_ENDPOINTS.TASK}/${taskId}`);
         const result = await response.json();
 
         if (result.status === 'completed') {

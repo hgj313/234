@@ -38,7 +38,7 @@ import { motion } from 'framer-motion';
 // import type { UploadProps, UploadFile } from 'antd/es/upload/interface';
 import { useOptimizationContext } from '../contexts/OptimizationContext';
 import { DesignSteel, ModuleSteel } from '../types';
-import { DEFAULT_CONSTRAINTS } from '../constants';
+import { DEFAULT_CONSTRAINTS, API_ENDPOINTS } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import { generateDisplayIds } from '../utils/steelUtils';
 
@@ -199,7 +199,7 @@ const OptimizationPage: React.FC = () => {
       const base64 = btoa(Array.from(uint8Array, byte => String.fromCharCode(byte)).join(''));
       
       // API调用
-      const response = await fetch('/.netlify/functions/upload-design-steels', {
+      const response = await fetch(API_ENDPOINTS.UPLOAD_DESIGN_STEELS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
